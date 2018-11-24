@@ -14,6 +14,8 @@ var rocketChatClient = new RocketChatClient({
 // 	console.log('the user is %', err, body);
 // });
 
+
+// POST: /api/v1/users.verifyToken
 rocketChatClient.users.validateSMS({
 	token: '735762',
 	contact: '7989562047',
