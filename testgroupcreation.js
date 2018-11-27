@@ -395,6 +395,51 @@ function createPrivateGroup() {
     setTimeout(() => {
         socket.send(JSON.stringify(method));
     }, 2000);
+
+    setTimeout(() => {
+        registerAfterInvite();
+    }, 3000)
+}
+
+function registerAfterInvite() {
+    let registerObj = {
+        msg: 'method',
+        method: 'registerUser',
+        params: [{
+            name: 'contacttest',
+            email: 'email2@domain.com',
+            department: null,
+            pass: "password",
+            'confirm-pass': "password"
+        }],
+        id: String(messagesCount++),
+    };
+    setTimeout(() => {
+        socket.send(JSON.stringify(registerObj));
+    }, 500);
+    setTimeout(() => {
+        loginAfterUserInvite();
+    }, 2000);
+}
+
+function loginAfterUserInvite() {
+    var login = {
+        "msg": "method",
+        "method": "login",
+        "id": String(messagesCount++),
+        "params": [{
+            "user": {
+                "email": "email2@domain.com"
+            },
+            "password": {
+                "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+                "algorithm": "sha-256"
+            }
+        }]
+    };
+    setTimeout(() => {
+        socket.send(JSON.stringify(login));
+    }, 500);
 }
 
 function generateHash(targetLength) {
