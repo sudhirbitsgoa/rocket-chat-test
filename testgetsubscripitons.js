@@ -10,7 +10,7 @@ let messagesCount = 1;
 socket.onmessage = function(e) {
 
     let response = JSON.parse(e.data);
-    console.log('response', response);
+    console.log('response %j', response);
 
     // you have to pong back if you need to keep the connection alive
     // each ping from server need a 'pong' back
@@ -34,7 +34,7 @@ socket.onmessage = function(e) {
         if (response.result.messages) {
             let allMsgs = response.result.messages;
             console.log('-----previous msgs---------------');
-            allMsgs.map(x => console.log(x))
+            allMsgs.map(x => console.log('%j', x))
             console.log('---------------------------------')
         }
     }
@@ -61,7 +61,7 @@ var login = {
     "id": "42",
     "params": [{
         "user": {
-            "username": "7989562047"
+            "email": "sudhirbitsgoa@gmail.com"
         },
         "password": {
             "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
@@ -73,8 +73,8 @@ setTimeout(() => {
     socket.send(JSON.stringify(login));
 }, 500);
 
-var getSubsc = {"msg":"method","method":"subscriptions/get","params":[{"$date":1543428694897}],"id":"11"};
-
+var getSubsc = {"msg":"method","method":"subscriptions/get","params":[{"$date":Date.now()}],"id":"11"};
+// this looks ok but need to check stream-notify-user also
 setTimeout(() => {
     socket.send(JSON.stringify(getSubsc))
 }, 2000);
