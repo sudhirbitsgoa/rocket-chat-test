@@ -114,6 +114,6 @@ let registerObjEmail = {
     id: String(messagesCount++),
 };
 
-setTimeout(() => {
-    socket.send(JSON.stringify(registerObjEmail));
-}, 6000);
+// setTimeout(() => {
+//     socket.send(JSON.stringify(registerObjEmail));
+// }, 6000);
