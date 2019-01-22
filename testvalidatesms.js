@@ -16,7 +16,7 @@ var rocketChatClient = new RocketChatClient({
 
 // POST: /api/v1/users.register
 rocketChatClient.users.register({
-	name: Math.random() + "Sudhir",
+	// name: Math.random() + "Sudhir",
 	contact: '7989562047'
 }, (e,b) => {
 	console.log('the registraion is success', b);
@@ -24,7 +24,7 @@ rocketChatClient.users.register({
 	rocketChatClient.users.validateSMS({
 		token: '717674',
 		contact: '7989562047',
-		username: '7989562047'
+		// username: '7989562047'
 	}, (err, body) => {
 		console.log('the body', err, body);
 	});
