@@ -75,10 +75,10 @@ setTimeout(() => {
     let login = {
         "msg": "method",
         "method": "login",
-        "id": "42",
+        "id": (messagesCount++).toString(),
         "params": [{
             "user": {
-                "email": "sudhirbitsgoa@gmail.com"
+                "email": "vineesha@gmail.com"
             },
             "password": {
                 "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
@@ -87,29 +87,44 @@ setTimeout(() => {
         }]
     };
     socket.send(JSON.stringify(login));
+    getOtherUser()
 }, timeCount);
-setTimeout(() => {
-    var getCategories = {"msg":"method","method":"getContactCategory","params":[],"id":(messagesCount++).toString()};
-    timeCount = timeCount + 500;
-    socket.send(JSON.stringify(getCategories));
-}, timeCount+2000)
-//2 create category
-// var roomName = 'Public'+Math.random();
-setTimeout(() => {
-    var createRoom = {"msg":"method","method":"createContactCategory","params":[roomName,{add: ['wd4dJHNpWpaugWEbB', 'iusPnrTNeeHgAdWgM', 'ws48dWz6XNJ8pmKKT'], remove: ['4']}],"id":(messagesCount++).toString()};
-    timeCount = timeCount + 500;
-    socket.send(JSON.stringify(createRoom));
-}, timeCount+1000);
+// getOtherUser();
+function getOtherUser() {
+    setTimeout(() => {
+        let vinUserId = loggedInUId;
+        timeCount = timeCount+500;
+        let login = {
+            "msg": "method",
+            "method": "login",
+            "id": (messagesCount++).toString(),
+            "params": [{
+                "user": {
+                    "email": "sudhirbitsgoa@gmail.com"
+                },
+                "password": {
+                    "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+                    "algorithm": "sha-256"
+                }
+            }]
+        };
+        socket.send(JSON.stringify(login));
+        addToContacts(vinUserId);
+        // getContacts()
+    }, timeCount+500);
+}
 
+function addToContacts(vinUserId) {
+    setTimeout(() => {
+        var createContact = {"msg":"method","method":"addRocketChatUsersAsContact","params":[[vinUserId]], "id":(messagesCount++).toString()};
+        timeCount = timeCount + 500;
+        socket.send(JSON.stringify(createContact));
+        getContacts();
+    }, timeCount+1000);
+}
 
-setTimeout(() => {
-    var createRoom = {"msg":"method","method":"createContactCategory","params":[roomName,{add: [], remove: ['2', '3']}],"id":(messagesCount++).toString()};
+function getContacts() {
+    var getContacts = {"msg":"method","method":"getContacts","params":[], "id":(messagesCount++).toString()};
     timeCount = timeCount + 500;
-    socket.send(JSON.stringify(createRoom));
-}, timeCount+2000);
-
-setTimeout(() => {
-    var getCategories = {"msg":"method","method":"getContactCategory","params":[],"id":(messagesCount++).toString()};
-    timeCount = timeCount + 500;
-    socket.send(JSON.stringify(getCategories));
-}, timeCount+4000)
+    socket.send(JSON.stringify(getContacts));
+}
