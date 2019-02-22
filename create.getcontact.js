@@ -13,6 +13,7 @@ let socket = new WebSocket('ws://localhost:3000/websocket');
 let messagesCount = 10;
 let timeCount = 1000;
 let loggedInUId;
+let contactId;
 // listen to messages passed to this socket
 socket.onmessage = function(e) {
 
@@ -43,6 +44,9 @@ socket.onmessage = function(e) {
             console.log('-----previous msgs---------------');
             allMsgs.map(x => console.log('%j', x))
             console.log('---------------------------------')
+        }
+        if (response.result.contacts) {
+            contactId = response.result.contacts[0];
         }
         if (response.result.rid) {
             roomId = response.result.rid;
@@ -109,8 +113,8 @@ function getOtherUser() {
             }]
         };
         socket.send(JSON.stringify(login));
-        addToContacts(vinUserId);
-        // getContacts()
+        // addToContacts(vinUserId);
+        getContacts()
     }, timeCount+500);
 }
 
@@ -127,4 +131,18 @@ function getContacts() {
     var getContacts = {"msg":"method","method":"getContacts","params":[], "id":(messagesCount++).toString()};
     timeCount = timeCount + 500;
     socket.send(JSON.stringify(getContacts));
+    setTimeout(blockContacts, 2000)
+}
+
+function blockContacts() {
+    var blockcontacts = { "msg": "method", "method": "blockContacts", "params": [[contactId]], "id": (messagesCount++).toString() };
+    timeCount = timeCount + 500;
+    socket.send(JSON.stringify(blockcontacts));
+    setTimeout(unblockContacts, 2000)
+}
+
+
+function unblockContacts() {
+    var unblockCnts = { "msg": "method", "method": "unblockContacts", "params": [[contactId]], "id": (messagesCount++).toString() };
+    socket.send(JSON.stringify(unblockCnts));
 }
