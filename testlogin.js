@@ -1,6 +1,7 @@
 
 const WebSocket = require('ws')
-let socket = new WebSocket('ws://dev.chatur.ai/websocket');
+// let socket = new WebSocket('ws://dev.chatur.ai/websocket');
+let socket = new WebSocket('ws://localhost:3000/websocket');
 
 //note messageCount is incremented with every message
 //but it can works even if you didn't change it
@@ -61,7 +62,7 @@ var login = {
     "id": "42",
     "params": [{
         "user": {
-            "email": "sudhir@chaturai.com"
+            "email": "sudhir@sambandha.social"
         },
         "password": {
             "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",

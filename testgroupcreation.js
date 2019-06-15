@@ -108,7 +108,7 @@ function createPrivateGroup() {
         "id": "42",
         "params": [{
             "user": {
-                "username": "sudhirbitsgoa"
+                "email": "sbaru@lantronix.com"
             },
             "password": {
                 "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
@@ -126,25 +126,15 @@ function createPrivateGroup() {
         "method": "createPrivateGroup",
         "id": "89",
         "params": [
-            "channel-name16", ["array-of-usernames", "who-are-in-the-channel", {
-            	username: 'username2',
-            	name: 'name1',
-            	email: 'email@domain.com',
-            	contact: 8464051035
-            }, {
-            	username: 'username3',
-            	name: 'name2',
-            	email: 'email2@domain.com',
-            	contact: 7989562047
-            }]
+            "channel-n  ame16"
         ]
     };
     setTimeout(() => {
         socket.send(JSON.stringify(method));
-    }, 2000);
+    }, 4000);
 
     setTimeout(() => {
-        registerAfterInvite();
+        // registerAfterInvite();
     }, 3000)
 }
 

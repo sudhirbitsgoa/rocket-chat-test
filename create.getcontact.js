@@ -6,7 +6,7 @@
 
 
 const WebSocket = require('ws')
-let socket = new WebSocket('ws://localhost:3000/websocket');
+let socket = new WebSocket('ws://35.200.136.212:80/websocket');
 
 //note messageCount is incremented with every message
 //but it can works even if you didn't change it
@@ -82,7 +82,7 @@ setTimeout(() => {
         "id": (messagesCount++).toString(),
         "params": [{
             "user": {
-                "email": "vineesha@gmail.com"
+                "email": "sudhir@chaturai.com"
             },
             "password": {
                 "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
@@ -104,7 +104,7 @@ function getOtherUser() {
             "id": (messagesCount++).toString(),
             "params": [{
                 "user": {
-                    "email": "sudhirbitsgoa@gmail.com"
+                    "email": "sudhir@chaturai.com"
                 },
                 "password": {
                     "digest": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
@@ -128,21 +128,22 @@ function addToContacts(vinUserId) {
 }
 
 function getContacts() {
+    console.log('get contacts triggered');
     var getContacts = {"msg":"method","method":"getContacts","params":[], "id":(messagesCount++).toString()};
     timeCount = timeCount + 500;
     socket.send(JSON.stringify(getContacts));
-    setTimeout(blockContacts, 2000)
+    // setTimeout(blockContacts, 2000)
 }
 
 function blockContacts() {
     var blockcontacts = { "msg": "method", "method": "blockContacts", "params": [[contactId]], "id": (messagesCount++).toString() };
     timeCount = timeCount + 500;
     socket.send(JSON.stringify(blockcontacts));
-    setTimeout(unblockContacts, 2000)
+    // setTimeout(unblockContacts, 2000)
 }
 
 
-function unblockContacts() {
-    var unblockCnts = { "msg": "method", "method": "unblockContacts", "params": [[contactId]], "id": (messagesCount++).toString() };
-    socket.send(JSON.stringify(unblockCnts));
-}
+// function unblockContacts() {
+//     var unblockCnts = { "msg": "method", "method": "unblockContacts", "params": [[contactId]], "id": (messagesCount++).toString() };
+//     socket.send(JSON.stringify(unblockCnts));
+// }
